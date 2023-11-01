@@ -29,7 +29,7 @@ const server = http.createServer((req, res) => {
                     //res.write('File denoised!');
                     //res.end();
 
-                    res.writeHead(200,{'content-type': "application/octet-stream", 'content-disposition': 'attachment; filename=denoised.pfm'});
+                    res.writeHead(200,{'content-type': "application/octet-stream"});
                     fs.createReadStream("./oidn/img/denoise.pfm").pipe(res);
                 });
             });
