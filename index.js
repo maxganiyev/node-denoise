@@ -10,28 +10,26 @@ const server = http.createServer((req, res) => {
         form.parse(req, function (err, fields, files) {
             var path = files.filetoupload[0].filepath;
             fs.rename(path, path + ".pfm", function (err) {
-                if (err) res.write(err.message);
-                res.write('File uploaded and renamed!' + path);
-                res.end();
-            });
 
-        //   exec("./oidn/bin/oidnDenoise --hdr ./oidn/img/noise.pfm -o ./oidn/img/denoise.pfm", (error, stdout, stderr) => {
-        //     if (error) {
-        //         res.statusCode = 500;
-        //         res.end(`error: ${error.message}` + `stdout: ${stdout}` + `stderr: ${stderr}`);
-        //         return;
-        //     }
-    
-        //     if (stderr) {
-        //         res.statusCode = 500;
-        //         res.end(`stderr: ${stderr}` + `stdout: ${stdout}` + `error: ${error.message}`);
-        //         return;
-        //     }
-    
-        //     res.statusCode = 200;
-        //     //res.setHeader('Content-Type', 'text/plain');
-        //     res.end(`stdout: ${stdout}`);
-        // });
+                exec("./oidn/bin/oidnDenoise --hdr " + path + ".pfm -o ./oidn/img/denoise.pfm", (error, stdout, stderr) => {
+                    if (error) {
+                        res.statusCode = 500;
+                        res.end(`error: ${error.message}` + `stdout: ${stdout}` + `stderr: ${stderr}`);
+                        return;
+                    }
+            
+                    if (stderr) {
+                        res.statusCode = 500;
+                        res.end(`stderr: ${stderr}` + `stdout: ${stdout}` + `error: ${error.message}`);
+                        return;
+                    }
+            
+                    res.statusCode = 200;
+                    //res.setHeader('Content-Type', 'text/plain');
+                    res.write('File denoised!');
+                    res.end();
+                });
+            });
         });
     } else {
         res.writeHead(200, {'Content-Type': 'text/html'});
