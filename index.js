@@ -3,7 +3,7 @@ const port = process.env.PORT || 3000;
 const { exec } = require("child_process");
 
 const server = http.createServer((req, res) => {
-    exec("ls -la", (error, stdout, stderr) => {
+    exec("./oidn/bin/oidnDenoise", (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`);
             return;
