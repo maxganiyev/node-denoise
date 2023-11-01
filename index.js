@@ -3,7 +3,7 @@ const port = process.env.PORT || 3000;
 const { exec } = require("child_process");
 
 const server = http.createServer((req, res) => {
-    exec("./oidn/bin/oidnDenoise --hdr ./oidn/img/noise.pfm -o .oidn/img/denoise.pfm", (error, stdout, stderr) => {
+    exec("./oidn/bin/oidnDenoise --hdr ./oidn/img/noise.pfm -o ./oidn/img/denoise.pfm", (error, stdout, stderr) => {
         if (error) {
             res.statusCode = 500;
             res.end(`error: ${error.message}` + `stdout: ${stdout}` + `stderr: ${stderr}`);
