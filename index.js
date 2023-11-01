@@ -26,8 +26,11 @@ const server = http.createServer((req, res) => {
             
                     res.statusCode = 200;
                     //res.setHeader('Content-Type', 'text/plain');
-                    res.write('File denoised!');
-                    res.end();
+                    //res.write('File denoised!');
+                    //res.end();
+
+                    res.writeHead(200,{'content-type': "application/octet-stream"});
+                    fs.createReadStream("./oidn/img/denoise.pfm").pipe(res);
                 });
             });
         });
