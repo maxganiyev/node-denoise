@@ -5,12 +5,14 @@ const { exec } = require("child_process");
 const server = http.createServer((req, res) => {
     exec("./oidn/bin/oidnDenoise", (error, stdout, stderr) => {
         if (error) {
-            console.log(`error: ${error.message}`);
+            res.statusCode = 500;
+            res.end(`error: ${error.message}`);
             return;
         }
 
         if (stderr) {
-            console.log(`stderr: ${stderr}`);
+            res.statusCode = 500;
+            res.end(`stderr: ${stderr}`);
             return;
         }
 
