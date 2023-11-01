@@ -13,7 +13,7 @@ const server = http.createServer((req, res) => {
                 if (err) res.write(err.message);
                 res.write('File uploaded and renamed!' + path);
                 res.end();
-              });
+            });
 
         //   exec("./oidn/bin/oidnDenoise --hdr ./oidn/img/noise.pfm -o ./oidn/img/denoise.pfm", (error, stdout, stderr) => {
         //     if (error) {
@@ -32,8 +32,6 @@ const server = http.createServer((req, res) => {
         //     //res.setHeader('Content-Type', 'text/plain');
         //     res.end(`stdout: ${stdout}`);
         // });
-
-          res.end();
         });
     } else {
         res.writeHead(200, {'Content-Type': 'text/html'});
