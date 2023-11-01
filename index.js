@@ -7,7 +7,7 @@ const server = http.createServer((req, res) => {
     if (req.url == '/fileupload') {
         var form = new formidable.IncomingForm();
         form.parse(req, function (err, fields, files) {
-          res.write(JSON.stringify(files));
+          res.write(files.filetoupload[0].filepath);
 
         //   exec("./oidn/bin/oidnDenoise --hdr ./oidn/img/noise.pfm -o ./oidn/img/denoise.pfm", (error, stdout, stderr) => {
         //     if (error) {
