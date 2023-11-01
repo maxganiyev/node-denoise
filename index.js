@@ -6,13 +6,13 @@ const server = http.createServer((req, res) => {
     exec("./oidn/bin/oidnDenoise", (error, stdout, stderr) => {
         if (error) {
             res.statusCode = 500;
-            res.end(`error: ${error.message}`);
+            res.end(`error: ${error.message}` + `stdout: ${stdout}` + `stderr: ${stderr}`);
             return;
         }
 
         if (stderr) {
             res.statusCode = 500;
-            res.end(`stderr: ${stderr}`);
+            res.end(`stderr: ${stderr}` + `stdout: ${stdout}` + `error: ${error.message}`);
             return;
         }
 
