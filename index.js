@@ -3,7 +3,7 @@ const port = process.env.PORT || 3000;
 const { exec } = require("child_process");
 
 const server = http.createServer((req, res) => {
-    exec("git version", (error, stdout, stderr) => {
+    exec("pwd", (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`);
             return;
