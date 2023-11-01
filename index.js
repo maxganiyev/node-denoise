@@ -10,8 +10,8 @@ const server = http.createServer((req, res) => {
         form.parse(req, function (err, fields, files) {
             var path = files.filetoupload[0].filepath;
             fs.rename(path, path + ".pfm", function (err) {
-                if (err) throw err;
-                res.write('File uploaded and renamed!');
+                if (err) res.write(err.message);
+                res.write('File uploaded and renamed!' + path);
                 res.end();
               });
 
