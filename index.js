@@ -2,12 +2,18 @@ const http = require('http');
 const port = process.env.PORT || 3000;
 const { exec } = require("child_process");
 var formidable = require('formidable');
+var fs = require('fs');
 
 const server = http.createServer((req, res) => {
     if (req.url == '/fileupload') {
         var form = new formidable.IncomingForm();
         form.parse(req, function (err, fields, files) {
-          res.write(files.filetoupload[0].filepath);
+            var path = files.filetoupload[0].filepath;
+            fs.rename(path, path + ".pfm", function (err) {
+                if (err) throw err;
+                res.write('File uploaded and renamed!');
+                res.end();
+              });
 
         //   exec("./oidn/bin/oidnDenoise --hdr ./oidn/img/noise.pfm -o ./oidn/img/denoise.pfm", (error, stdout, stderr) => {
         //     if (error) {
